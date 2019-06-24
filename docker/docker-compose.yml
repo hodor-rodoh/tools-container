@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  terraform:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ../:/terraform
+      - ~/.aws:/root/.aws # mounting /home/.aws from local machine to /root/.aws within the container
+      - ~/.ssh:/tmp/.ssh:ro # read only ssh from local to docker container to clone repos
+      - ~/.kube/:/root/.kube # mounting kubeconfigs to do kube stuff sososo
+      # - ~/.bash_history:/root/.bash_history # if you want your bash history to carry overview
+      # - ~/git:/GIT:ro # mounting code from machine to docker container
+      # - ~${some directory}:/root/:ro # add additional directories you need to mount
